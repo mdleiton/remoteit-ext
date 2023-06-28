@@ -1,0 +1,158 @@
+
+# Work in progress.
+
+## Roadmap
+1. Enable SSH connections between devices (API/Backend).\
+2. Enable file download and upload on devices (API/Backend).\
+3. Implement user registration and permission management with devices (API/Backend).\
+4. Implement a security layer for establishing SSH connections or file transfers on devices (API/Backend).\
+5. Manage concurrency of SSH access among users to the same device (API/Backend).\
+6. User interface: Allow users to register, enter remote.it credentials, and share devices.\
+7. User interface: List devices, create connections, download files, upload files.\
+8. View current connections and the users utilizing them.\
+
+
+| Features                                                           | Progress         |
+| ------------------------------------------------------------------ | ---------------- |
+| 1. Enable SSH connections between devices                          | Completed        |
+| 2. Enable file download and upload on devices                      | Completed        |
+| 3. Implement user registration and permission management           | Not Started      |
+| 4. Implement security layer for SSH connections and file transfers | Not Started      |
+| 5. Manage concurrency of SSH access among users                    | Not Started      |
+| 6. User interface for registration and device sharing              | Not Started      |
+| 7. User interface for device management and file operations        | Not Started      |
+| 8. View current connections and users                              | Not Started      |
+
+## Installation and execution
+To use the remote.it Extension, please follow these instructions:\
+
+1. Ensure that you have Python 3.7 installed on your system. If not, download and install Python 3.7 from the official Python website (https://www.python.org/downloads/).\
+
+2. Clone or download the remote.it Extension repository to your local machine.\
+
+3. Navigate to the directory where you have the remote.it Extension files.\
+
+4. Install the required packages by running the following command in your terminal or command prompt:\
+
+```bash
+    pip install -r requirements.txt
+```
+
+This command will install all the necessary packages specified in the requirements.txt file. Once the packages are installed successfully, you can now use the remote.it Extension.\
+
+Ensure that you have a valid remote.it account and appropriate credentials to authenticate and access the remote.it services.To obtain the necessary credentials (API key and secret key) from remote.it and ensure the security of this information, please follow these steps:\
+
+1. Visit the remote.it website (https://remote.it) and sign in to your account. If you don't have an account, create one by signing up.\
+
+2. After logging in, navigate to the account settings or developer settings section of your remote.it account.\
+
+3. Look for the API key and secret key sections or options. Generate a new API key and secret key if you haven't already done so.\
+
+4. Copy the API key and secret key values provided by remote.it. These keys are critical for authentication and accessing remote.it services.
+Note: Do not share or expose your API key and secret key publicly or commit them to version control systems. Keep this .env file secure and ensure it is not accessible by unauthorized individuals.\
+
+Copy .env_template content and page it in new file with name .env\
+1. Generate new SECRET_KEY value in https://djecrety.ir/ 
+2. Change R3_SECRET_ACCESS_KEY, R3_ACCESS_KEY_ID, API_KEY from remote.it information. Note: This remote.it settings in .env is temporal.
+3. Change emails settings. See https://docs.djangoproject.com/en/4.2/topics/email/
+4. Save the .env file.\
+
+Run to try software:\
+```bash
+    python3 manage.py runserver
+```
+
+## USE
+Currently, the API can be used, which means you can make GET and POST requests.\
+1. List devices. With this requests you get a list with your devices. See deviceaddress key for each device.\
+```bash
+    import requests
+    url = "http://localhost:8000/api/list-devices/"
+    response = requests.get(url)
+    print("Response:", str(response.json()))
+```
+2. Create a ssh connection. With this requests you get information to create a ssh connection.\
+```bash
+    import requests
+    url = "http://localhost:8000/api/device/generate-connection/<DEVICEADDRESS>/"
+    response = requests.get(url)
+    print("Response:", str(response.json()))
+```
+NOTE: Change DEVICEADDRESS with some devices from device list.\
+3. Download file from device and send by email.\
+```bash
+    import requests
+    url = "http://localhost:8000/api/device/download-file/"
+    data = {
+        "username": "<DEVICE_USERNAME>",
+        "password": "<DEVICE_PASSWORD>",
+        "emails": ["<EMAIL_TO_SEND_FILE>"],
+        "deviceaddress": "<DEVICEADDRESS>",
+        "remote_file": "<FILE_IN_DEVICE>",
+        "save_as": "<FILENAME_IN_EMAIL>",
+        "timeout": 1000
+    }
+    response = requests.post(url, json=data)
+    print("Response:", str(response.json()))
+```
+
+To report an error or issue on GitHub and contribute through pull requests, follow these steps:\
+
+Reporting an Error/Issue:\
+
+1. Visit the repository's GitHub page where you want to report the error or issue.
+
+2. Click on the "Issues" tab at the top of the repository page.
+
+3. Click on the "New issue" button to create a new issue.
+
+4. Provide a descriptive title for the issue and include a detailed description of the error or problem you encountered. Be sure to include steps to reproduce the issue if applicable.
+
+5. Add any relevant labels or assignees to the issue to help with categorization and assign responsibility.
+
+6. Click on the "Submit new issue" button to create the issue. This will notify the repository maintainers about the problem, and they will review and respond accordingly.\
+
+Contributing through Pull Requests:
+
+1. Fork the repository you want to contribute to. This creates a copy of the repository under your GitHub account.
+
+2. Clone the forked repository to your local machine using Git:
+
+   ```shell
+   git clone https://github.com/your-username/repository.git
+   ```
+
+3. Create a new branch for your contribution. This keeps your changes separate from the main branch:
+
+   ```shell
+   git checkout -b my-contribution
+   ```
+
+4. Make the necessary changes or additions to the codebase.
+
+5. Commit your changes with a descriptive commit message:
+
+   ```shell
+   git commit -m "Add feature/fix for XYZ"
+   ```
+
+6. Push the changes to your forked repository:
+
+   ```shell
+   git push origin my-contribution
+   ```
+
+7. Visit the original repository on GitHub and click on the "Pull Requests" tab.
+
+8. Click on the "New pull request" button to create a new pull request.
+
+9. Select the appropriate branches for the base and head repositories. The base branch is usually the main branch of the original repository, while the head branch is your forked repository with the changes.
+
+10. Provide a clear and concise title and description for your pull request, explaining the changes you made.
+
+11. Review the changes and, if everything looks good, click on the "Create pull request" button to submit it.
+
+Your pull request will be reviewed by the repository maintainers, who may provide feedback or ask for further modifications. Once approved, your changes will be merged into the main repository.
+
+Remember to follow any guidelines or contributing instructions specified in the repository's documentation for a smoother contribution process.
+
