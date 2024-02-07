@@ -1,6 +1,6 @@
-requests-http-signature=0.1
-requests=2.31.0
-pexpect=4.8.0
-python-dotenv=0.21.1
-Django=3.2.19
-djangorestframework=3.14.0
+requests-http-signature==0.1.0
+requests==2.31.0
+pexpect==4.8.0
+python-dotenv==0.21.1
+Django==3.2.23
+djangorestframework==3.14.0
