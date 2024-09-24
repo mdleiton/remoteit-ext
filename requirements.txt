@@ -3,4 +3,4 @@ requests==2.32.0
 pexpect==4.8.0
 python-dotenv==0.21.1
 Django==3.2.25
-djangorestframework==3.14.0
+djangorestframework==3.15.2
